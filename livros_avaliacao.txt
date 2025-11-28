@@ -1,1 +1,9 @@
-1997, Harry Potter e a Pedra Filosofal,  J.K. Rowling, (1, {'lendo'})1954, A Sociedade do Anel,  J.R.R Tolkien, (1, {'lendo'})1960, O Sol È para Todos,  Harper Lee, (1, {'lendo'})2003, O CÛdigo Da Vinci,  Dan Brown, (1, {'lendo'})1985, It - A Coisa,  Stephen King, (1, {'lido'})2011, A DanÁa dos Dragıes,  George R.R. Martin2018, (1, {'lido'})2005, A Menina que Roubava Livros,  Markus Zusak, (1, {'lido'})2012, A Culpa È das Estrelas,  John Green, (1, {'lido'})2015, A Garota no Trem,  Paula Howkins, (1, {'lido'})
+1997, Harry Potter e a Pedra Filosofal,  J.K. Rowling, 1, lido
+1954, A Sociedade do Anel,  J.R.R Tolkien, 1, lido
+1960, O Sol √© para Todos,  Harper Lee, 1, lido
+2003, O C√≥digo Da Vinci,  Dan Brown, 1, lido
+1985, It - A Coisa,  Stephen King, 1, lido
+2011, A Dan√ßa dos Drag√µes,  George R.R. Martin2018, 1, lido
+2005, A Menina que Roubava Livros,  Markus Zusak, 1, lido
+2012, A Culpa √© das Estrelas,  John Green, 1, lido
+2015, A Garota no Trem,  Paula Howkins, 1, lido
