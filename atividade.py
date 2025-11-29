@@ -1,72 +1,41 @@
 import funcoes
 
-textoPrincipal = funcoes.leitor("livros.txt")
-textoLimpo= []
-texto = []
-for i in range(len(textoPrincipal)):
-    textoLimpo.append(textoPrincipal[i].removesuffix("\n"))
-for j in range(len(textoLimpo)):
-    texto.append(textoLimpo[j].split(","))
-nomes = []
-notas = []
-anos = []
-autor = []
-for a in range(len(texto)):
-    nomes.append(texto[a][1].removeprefix(" "))
-    anos.append(texto[a][0])
-    autor.append(texto[a][2])
-    while True:
-        nota_ = int(input(f"Digite uma nota para o filme {nomes[a]}: "))
-        if nota_ > 0 and nota_ <= 10:
-            notas.append(nota_)
-            break
-status = []
-for a in range(len(nomes)):
-    while True:
-        leitura = input(f"Digite qual o status de leitura de {nomes[a]}: ")
-        if leitura == "lido" or leitura == "lendo" or leitura == "fila":
-            status.append(leitura)
-            break
-        else:
-            print("Resposta inválida, tente 'lido', 'lendo' ou 'fila':")
 
-with open("livros_avaliacao.txt", "w", encoding="utf-8") as arq:
-    for um in range(len(texto)):
-        arq.write(f"{anos[um]}, {nomes[um]}, {autor[um]}, {notas[um]}, {status[um]}\n")
-    
 avaliadosPrincipal = funcoes.leitor("livros_avaliacao.txt")
+
 avaliados = []
-for i in range(len(avaliadosPrincipal)):
-    avaliados.append(avaliadosPrincipal[i].removesuffix("\n"))
-for j in range(len(avaliados)):
-    avaliados[j] = avaliados[j].split(",")
+for linha in avaliadosPrincipal:
+    linha = linha.removesuffix("\n")
+    avaliados.append(linha.split(","))
 
-verificando = []
-for teste in range(len(avaliados)):
-    if avaliados[teste][4] != ' fila':
-        verificando.append([avaliados[teste][1], avaliados[teste][3]])
+validos = []
+for item in avaliados:
+    status = item[4].strip()     # remove espaços
+    if status == "lido" or status == "lendo":
+        nome = item[1].strip()
+        nota = int(item[3].strip())
+        ano = item[0].strip()
+        autor = item[2].strip()
+        validos.append([nome, nota, ano, autor])
 
-for i in range(len(verificando)):
-    verificando[i][1] = int(verificando[i][1])
+notas = []
+for v in validos:
+    notas.append(v[1])
 
-notasLimpas = []
-for lal in range(len(verificando)):
-    notasLimpas.append(verificando[lal][1])
+notas_ordenadas = sorted(notas, reverse=True)
 
-notasLimpas = sorted(notasLimpas, reverse=True)
+# Pegar as 5 maiores
+top5_notas = notas_ordenadas[:5]
 
-notasFinais= []
-for la in range(0, 5, 1):
-    notasFinais.append(notasLimpas[la])
+recomendados = []
+for nota in top5_notas:
+    for livro in validos:
+        if livro[1] == nota and livro not in recomendados:
+            recomendados.append(livro)
+            break
+    if len(recomendados) == 5:
+        break
 
-listaFinal = []
-for ti in range(9):
-    for le in range(len(verificando)):
-        for teste in range(len(notasFinais)):
-            if notasFinais[teste] != verificando[le]:
-                notasFinais.remove(notasFinais[teste])
-            else:
-                listaFinal.append(verificando[le][0])
-                if len(listaFinal) == 5:
-                    break
-print(listaFinal)
+with open("livros_recomendados.txt", "w", encoding="utf-8") as arq:
+    for item in recomendados:
+        arq.write(f"{item[2]}, {item[0]}, {item[3]}, {item[1]}\n")
